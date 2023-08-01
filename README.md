@@ -22,7 +22,7 @@ StringTheory provides a context that contains several methods to manipulate stri
 Here is an example of how to use StringTheory:
 
 ```javascript
-const prompt = StringTheory()
+const prompt = new StringTheory()
 const people = ['peter', 'paul', 'mary']
 const places = {
   state: 'california',
