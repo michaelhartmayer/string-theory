@@ -1,0 +1,28 @@
+{
+  "name": "string-theory",
+  "version": "1.0.0",
+  "description": "StringTheory is a JavaScript library for building strings dynamically. It provides a fluent interface to add, modify, and manipulate strings in a more readable and maintainable way. It supports conditional addition, iteration over arrays, and more.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelhartmayer/string-theory.git"
+  },
+  "keywords": [
+    "string",
+    "dynamic",
+    "manipulation",
+    "chaining",
+    "prompts",
+    "llm",
+    "text2text"
+  ],
+  "author": "Michael Hartmayer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelhartmayer/string-theory/issues"
+  },
+  "homepage": "https://github.com/michaelhartmayer/string-theory#readme"
+}
