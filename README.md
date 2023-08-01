@@ -1,4 +1,5 @@
 # StringTheory
+**NOTE**: GPT made this README.md 😆 It was late. Grain of salt.
 
 StringTheory is a JavaScript library for building strings dynamically. It provides a fluent interface to add, modify, and manipulate strings in a more readable and maintainable way. It supports conditional addition, iteration over arrays, and more.
 
