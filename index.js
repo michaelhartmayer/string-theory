@@ -1,95 +1,114 @@
-const StringTheory = () => {
-  const string = []
-
-  const context = {
-    add,
-    render,
-    if: _if,
-    each,
-    clear,
-    json,
-    n,
+/**
+ * StringTheory is a utility to manipulate strings
+ */
+class StringTheory {
+  constructor() {
+    this.string = [];
   }
 
-  const mainContext = () => context
-
-  const fakeContext = () => {
-    const keys = Object.keys(mainContext())
-    const mock = keys.reduce((a, b) => {
-      a[b] = fake
-      return a
-    }, {})
-    
-    return mock
+  /**
+   * Adds a string or the result of a function to the string array
+   * @param {string|Function} s - string or function to add
+   * @returns {StringTheory}
+   */
+  add(s) {
+    if (typeof s === 'function') {
+      s = s(this) || '';
+    }
+    this.string.push(s);
+    return this;
   }
 
-  function fake () {
-    return fakeContext()
+  /**
+   * Renders the string array joined by newlines
+   * @returns {string}
+   */
+  render() {
+    return this.string.join('\n');
   }
 
-  function json (o = {}, spaces = 2) {
-    string.push(JSON.stringify(o, null, spaces))
-    return mainContext()
+  /**
+   * Adds a JSON string to the string array
+   * @param {Object} o - object to stringify
+   * @param {number} spaces - number of spaces for indentation
+   * @returns {StringTheory}
+   */
+  json(o = {}, spaces = 2) {
+    this.string.push(JSON.stringify(o, null, spaces));
+    return this;
   }
 
-  function n (n = 1) {
-    const s = Array(n).map(Boolean).join('\n')
-    string.push(s)
-    return mainContext()
+  /**
+   * Adds newlines to the string array
+   * @param {number} n - number of newlines
+   * @returns {StringTheory}
+   */
+  n(n = 1) {
+    const s = Array(n).map(Boolean).join('\n');
+    this.string.push(s);
+    return this;
   }
 
-  function clear () {
-    string = []
-  }
-  
-  function _if (condition) {
-    if (condition) return mainContext()
-    return fakeContext()
+  /**
+   * Clears the string array
+   */
+  clear() {
+    this.string = [];
   }
 
-  function add (s) {
-   if (typeof s === 'function') 
-     s = s(mainContext())
-    
-    string.push(s)
-    return mainContext()
+  /**
+   * Returns the main context if the condition is true, otherwise returns a mock context
+   * @param {boolean} condition - condition to check
+   * @returns {StringTheory|Object}
+   */
+  if(condition) {
+    if (condition) return this;
+    return this.mockContext();
   }
 
-  function each (...args) {
-    let prefix = ''
-    let lines = []
-    let suffix = ''
-    let delimeter = '\n'
+  /**
+   * Iterates over an array of lines and adds them to the string array
+   * @param {Array} args - array of arguments
+   * @returns {StringTheory}
+   */
+  each(...args) {
+    let prefix = '';
+    let lines = [];
+    let suffix = '';
+    let delimiter = '\n';
 
-    const [a, b, c, d] = args
-    
+    const [a, b, c, d] = args;
+
     if (typeof a === 'string') {
-      prefix = a || prefix
-      lines = b || lines
-      suffix = c || suffix
-      delimeter = d || delimeter
+      prefix = a || prefix;
+      lines = b || lines;
+      suffix = c || suffix;
+      delimiter = d || delimiter;
+    } else {
+      lines = a || lines;
+      suffix = b || suffix;
+      delimiter = c || delimiter;
     }
 
-    else {
-      lines = a || lines
-      suffix = b || suffix
-      delimeter = c || delimeter
-    }
+    const result = lines.map(line => prefix + line + suffix).join(delimiter);
 
-    const result = lines.map(line => prefix + line + suffix).join(delimeter)
+    this.string.push(result);
 
-    string.push(result)
-    
-    return mainContext()
-  }
-  
-  function render () {
-    return string.join('\n')
+    return this;
   }
 
-  return {
-    ...mainContext()
+  /**
+   * Creates a mock context
+   * @returns {Object}
+   */
+  mockContext() {
+    const self = this;
+    return new Proxy({}, {
+      get: function() {
+        return () => self.mockContext();
+      }
+    });
   }
 }
 
-module.exports = StringTheory
+module.exports = StringTheory;
