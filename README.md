@@ -44,7 +44,7 @@ prompt.json(places).n(1)
 prompt.each('- ', people, ',')
 prompt.add(smile)
 
-const r = await prompt.render()
+const r = prompt.render()
 
 console.log(r)
 ```
