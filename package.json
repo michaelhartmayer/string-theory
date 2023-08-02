@@ -1,5 +1,5 @@
 {
-  "name": "@michaelhartmayer/string-theory",
+  "name": "string-theory",
   "version": "1.0.0",
   "description": "StringTheory is a JavaScript library for building strings dynamically. It provides a fluent interface to add, modify, and manipulate strings in a more readable and maintainable way. It supports conditional addition, iteration over arrays, and more.",
   "main": "index.js",
