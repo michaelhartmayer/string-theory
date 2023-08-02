@@ -5,7 +5,15 @@ StringTheory is a JavaScript library for building strings dynamically. It provid
 
 ## Installation
 
-You can include StringTheory in your project by copying the provided function into your code.
+Use the package manager [npm](https://www.npmjs.com/) to install StringTheory.
+
+```bash
+npm install @michaelhartmayer/string-theory
+
+# or
+
+yarn add @michaelhartmayer/string-theory
+```
 
 ## Usage
 
@@ -22,6 +30,8 @@ StringTheory provides a context that contains several methods to manipulate stri
 Here is an example of how to use StringTheory:
 
 ```javascript
+const StringTheory = require('@michaelhartmayer/string-theory')
+
 const prompt = new StringTheory()
 const people = ['peter', 'paul', 'mary']
 const places = {
